@@ -1,8 +1,22 @@
+import 'package:hive/hive.dart';
+
+part 'task.g.dart';
+
+@HiveType(typeId: 0)
 class Task {
+  @HiveField(0)
   bool isChecked;
+
+  @HiveField(1)
   final String? id;
+
+  @HiveField(2)
   final String title;
+
+  @HiveField(3)
   final String description;
+
+  @HiveField(4)
   final DateTime? dateCreated;
 
   Task({
@@ -27,4 +41,4 @@ class Task {
       ]);
 }
 
-List<Task> tasks = [];
+final List tasks = [];

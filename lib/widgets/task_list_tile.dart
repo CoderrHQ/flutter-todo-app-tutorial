@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 import '/models/task.dart';
 
@@ -77,6 +78,17 @@ class _TaskListTileState extends State<TaskListTile> {
                   onChanged: (value) {
                     widget.task.isChecked = value!;
                     setState(() {});
+                    // Update is checked status in Hive DB
+                    Hive.box<Task>('tasks').put(
+                      widget.task.id,
+                      Task(
+                        id: widget.task.id,
+                        title: widget.task.title,
+                        description: widget.task.description,
+                        dateCreated: widget.task.dateCreated,
+                        isChecked: widget.task.isChecked,
+                      ),
+                    );
                   },
                 ),
               ],
